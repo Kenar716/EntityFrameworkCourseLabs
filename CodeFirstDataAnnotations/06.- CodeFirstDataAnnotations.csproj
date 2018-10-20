@@ -69,5 +69,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810201940395_InitialModel.resx">
+      <DependentUpon>201810201940395_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810202020263_AddAnnotationCourseTable.resx">
+      <DependentUpon>201810202020263_AddAnnotationCourseTable.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
