@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="Cover.cs" />
     <Compile Include="Migrations\201810202052372_InitialModel.cs" />
     <Compile Include="Migrations\201810202052372_InitialModel.Designer.cs">
       <DependentUpon>201810202052372_InitialModel.cs</DependentUpon>

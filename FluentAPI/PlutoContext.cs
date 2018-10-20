@@ -36,6 +36,10 @@ namespace FluentAPI
                 .WithMany(t => t.Courses)
                 .Map(m => m.ToTable("CourseTags"));
 
+            modelBuilder.Entity<Course>()
+                .HasRequired(c => c.Cover)
+                .WithRequiredPrincipal(c => c.Course); //This property belons to the Model-Table that is the parent in the relationship
+
             base.OnModelCreating(modelBuilder); 
         }
     }
