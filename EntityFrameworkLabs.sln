@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.- CodeFirstVidzy", "Code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.- CodeFirstDataAnnotations", "CodeFirstDataAnnotations\06.- CodeFirstDataAnnotations.csproj", "{74CE80C0-F75F-44EE-A716-3F051E90D82A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.- FluentAPI", "FluentAPI\07.- FluentAPI.csproj", "{415B010B-3387-41C8-8649-98E423189105}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{74CE80C0-F75F-44EE-A716-3F051E90D82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74CE80C0-F75F-44EE-A716-3F051E90D82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74CE80C0-F75F-44EE-A716-3F051E90D82A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415B010B-3387-41C8-8649-98E423189105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415B010B-3387-41C8-8649-98E423189105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415B010B-3387-41C8-8649-98E423189105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415B010B-3387-41C8-8649-98E423189105}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
