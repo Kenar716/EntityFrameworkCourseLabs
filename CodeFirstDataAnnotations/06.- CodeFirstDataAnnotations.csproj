@@ -51,6 +51,14 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="Migrations\201810201940395_InitialModel.cs" />
+    <Compile Include="Migrations\201810201940395_InitialModel.Designer.cs">
+      <DependentUpon>201810201940395_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810202020263_AddAnnotationCourseTable.cs" />
+    <Compile Include="Migrations\201810202020263_AddAnnotationCourseTable.Designer.cs">
+      <DependentUpon>201810202020263_AddAnnotationCourseTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PlutoContext.cs" />
     <Compile Include="Program.cs" />
