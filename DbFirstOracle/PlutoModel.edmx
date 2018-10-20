@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PlutoModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTHORS">
+          <Key>
+            <PropertyRef Name="AUTHORID" />
+          </Key>
+          <Property Name="AUTHORID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COURSES">
+          <Key>
+            <PropertyRef Name="COURSEID" />
+          </Key>
+          <Property Name="COURSEID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="AUTHORID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="TITLE" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="4000" Nullable="false" />
+          <Property Name="FULLPRICE" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="LEVELL" Type="number" Precision="3" Scale="0" />
+        </EntityType>
+        <EntityType Name="COURSESECTION">
+          <Key>
+            <PropertyRef Name="SECTIONID" />
+          </Key>
+          <Property Name="SECTIONID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="COURSEID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="TITLE" Type="varchar2" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COURSETAGS">
+          <Key>
+            <PropertyRef Name="COURSEID" />
+            <PropertyRef Name="TAGID" />
+          </Key>
+          <Property Name="COURSEID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="TAGID" Type="number" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POSTS">
+          <Key>
+            <PropertyRef Name="POSTID" />
+          </Key>
+          <Property Name="POSTID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="DATEPUBLISHED" Type="date" Nullable="false" />
+          <Property Name="TITLE" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="BODY" Type="varchar2" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAGS">
+          <Key>
+            <PropertyRef Name="TAGID" />
+          </Key>
+          <Property Name="TAGID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBLUSER">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="number" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="number" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="PLUTOE1_COURSEC_COURSEID_FK">
+          <End Role="COURSES" Type="Self.COURSES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="COURSESECTION" Type="Self.COURSESECTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSES">
+              <PropertyRef Name="COURSEID" />
+            </Principal>
+            <Dependent Role="COURSESECTION">
+              <PropertyRef Name="COURSEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PLUTOE1_COURSES_AUTHORID_FK">
+          <End Role="AUTHORS" Type="Self.AUTHORS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="COURSES" Type="Self.COURSES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTHORS">
+              <PropertyRef Name="AUTHORID" />
+            </Principal>
+            <Dependent Role="COURSES">
+              <PropertyRef Name="AUTHORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PLUTOE1_COURTAG_COURSEID_FK">
+          <End Role="COURSES" Type="Self.COURSES" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="COURSETAGS" Type="Self.COURSETAGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSES">
+              <PropertyRef Name="COURSEID" />
+            </Principal>
+            <Dependent Role="COURSETAGS">
+              <PropertyRef Name="COURSEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PLUTOE1_COURTAG_TAGID_FK">
+          <End Role="TAGS" Type="Self.TAGS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="COURSETAGS" Type="Self.COURSETAGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAGS">
+              <PropertyRef Name="TAGID" />
+            </Principal>
+            <Dependent Role="COURSETAGS">
+              <PropertyRef Name="TAGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="FUNCGETAUTHORCOURSES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST">
+          <Parameter Name="AAUTHORID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETECOURSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST">
+          <Parameter Name="ACOURSEID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_GETCOURSES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST" />
+        <Function Name="SP_INSERTCOURSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST">
+          <Parameter Name="AAUTHORID" Type="number" Mode="In" />
+          <Parameter Name="ATITLE" Type="varchar2" Mode="In" />
+          <Parameter Name="ADESC" Type="varchar2" Mode="In" />
+          <Parameter Name="APRICE" Type="number" Mode="In" />
+          <Parameter Name="ALEVELSTRING" Type="varchar2" Mode="In" />
+          <Parameter Name="ALEVEL" Type="number" Mode="In" />
+        </Function>
+        <Function Name="UPDATECOURSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST">
+          <Parameter Name="ACOURSEID" Type="number" Mode="In" />
+          <Parameter Name="ATITLE" Type="varchar2" Mode="In" />
+          <Parameter Name="ADESC" Type="varchar2" Mode="In" />
+          <Parameter Name="ALEVELSTRING" Type="varchar2" Mode="In" />
+          <Parameter Name="ALEVEL" Type="number" Mode="In" />
+        </Function>
+        <EntityContainer Name="PlutoModelStoreContainer">
+          <EntitySet Name="AUTHORS" EntityType="Self.AUTHORS" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <EntitySet Name="COURSES" EntityType="Self.COURSES" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <EntitySet Name="COURSESECTION" EntityType="Self.COURSESECTION" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <EntitySet Name="COURSETAGS" EntityType="Self.COURSETAGS" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <EntitySet Name="POSTS" EntityType="Self.POSTS" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <EntitySet Name="TAGS" EntityType="Self.TAGS" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <EntitySet Name="TBLUSER" EntityType="Self.TBLUSER" Schema="PLUTOEFDBFIRST" store:Type="Tables" />
+          <AssociationSet Name="PLUTOE1_COURSEC_COURSEID_FK" Association="Self.PLUTOE1_COURSEC_COURSEID_FK">
+            <End Role="COURSES" EntitySet="COURSES" />
+            <End Role="COURSESECTION" EntitySet="COURSESECTION" />
+          </AssociationSet>
+          <AssociationSet Name="PLUTOE1_COURSES_AUTHORID_FK" Association="Self.PLUTOE1_COURSES_AUTHORID_FK">
+            <End Role="AUTHORS" EntitySet="AUTHORS" />
+            <End Role="COURSES" EntitySet="COURSES" />
+          </AssociationSet>
+          <AssociationSet Name="PLUTOE1_COURTAG_COURSEID_FK" Association="Self.PLUTOE1_COURTAG_COURSEID_FK">
+            <End Role="COURSES" EntitySet="COURSES" />
+            <End Role="COURSETAGS" EntitySet="COURSETAGS" />
+          </AssociationSet>
+          <AssociationSet Name="PLUTOE1_COURTAG_TAGID_FK" Association="Self.PLUTOE1_COURTAG_TAGID_FK">
+            <End Role="TAGS" EntitySet="TAGS" />
+            <End Role="COURSETAGS" EntitySet="COURSETAGS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlutoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorID" />
+          </Key>
+          <Property Name="AuthorID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.PLUTOE1_COURSES_AUTHORID_FK" FromRole="AUTHORS" ToRole="COURSES" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="AuthorID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FullPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Author" Relationship="Self.PLUTOE1_COURSES_AUTHORID_FK" FromRole="COURSES" ToRole="AUTHORS" />
+          <NavigationProperty Name="CourseSections" Relationship="Self.PLUTOE1_COURSEC_COURSEID_FK" FromRole="COURSES" ToRole="COURSESECTION" />
+          <NavigationProperty Name="Tags" Relationship="Self.COURSETAGS" FromRole="COURSES" ToRole="TAGS" />
+          <Property Name="Levell" Type="PlutoModel.Level" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseSection">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.PLUTOE1_COURSEC_COURSEID_FK" FromRole="COURSESECTION" ToRole="COURSES" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="DatePublished" Type="DateTime" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.COURSETAGS" FromRole="TAGS" ToRole="COURSES" />
+        </EntityType>
+        <EntityType Name="TblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PLUTOE1_COURSES_AUTHORID_FK">
+          <End Role="AUTHORS" Type="PlutoModel.Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="COURSES" Type="PlutoModel.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTHORS">
+              <PropertyRef Name="AuthorID" />
+            </Principal>
+            <Dependent Role="COURSES">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PLUTOE1_COURSEC_COURSEID_FK">
+          <End Role="COURSES" Type="PlutoModel.Course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="COURSESECTION" Type="PlutoModel.CourseSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COURSES">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="COURSESECTION">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COURSETAGS">
+          <End Role="COURSES" Type="PlutoModel.Course" Multiplicity="*" />
+          <End Role="TAGS" Type="PlutoModel.Tag" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PlutoDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authors" EntityType="PlutoModel.Author" />
+          <EntitySet Name="Courses" EntityType="PlutoModel.Course" />
+          <EntitySet Name="CourseSections" EntityType="PlutoModel.CourseSection" />
+          <EntitySet Name="Posts" EntityType="PlutoModel.Post" />
+          <EntitySet Name="Tags" EntityType="PlutoModel.Tag" />
+          <EntitySet Name="TblUsers" EntityType="PlutoModel.TblUser" />
+          <AssociationSet Name="PLUTOE1_COURSES_AUTHORID_FK" Association="Self.PLUTOE1_COURSES_AUTHORID_FK">
+            <End Role="AUTHORS" EntitySet="Authors" />
+            <End Role="COURSES" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="PLUTOE1_COURSEC_COURSEID_FK" Association="Self.PLUTOE1_COURSEC_COURSEID_FK">
+            <End Role="COURSES" EntitySet="Courses" />
+            <End Role="COURSESECTION" EntitySet="CourseSections" />
+          </AssociationSet>
+          <AssociationSet Name="COURSETAGS" Association="Self.COURSETAGS">
+            <End Role="COURSES" EntitySet="Courses" />
+            <End Role="TAGS" EntitySet="Tags" />
+          </AssociationSet>
+          <FunctionImport Name="GetAuthorCourses" EntitySet="Courses" ReturnType="Collection(PlutoModel.Course)">
+          <Parameter Name="AAUTHORID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCourse">
+          <Parameter Name="ACOURSEID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="GetCourses" EntitySet="Courses" ReturnType="Collection(PlutoModel.Course)" />
+          <FunctionImport Name="InsertCourse">
+            <Parameter Name="AAUTHORID" Mode="In" Type="Decimal" />
+            <Parameter Name="ATITLE" Mode="In" Type="String" />
+            <Parameter Name="ADESC" Mode="In" Type="String" />
+            <Parameter Name="APRICE" Mode="In" Type="Decimal" />
+            <Parameter Name="ALEVELSTRING" Mode="In" Type="String" />
+            <Parameter Name="ALEVEL" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCourse">
+            <Parameter Name="ACOURSEID" Mode="In" Type="Decimal" />
+            <Parameter Name="ATITLE" Mode="In" Type="String" />
+            <Parameter Name="ADESC" Mode="In" Type="String" />
+            <Parameter Name="ALEVELSTRING" Mode="In" Type="String" />
+            <Parameter Name="ALEVEL" Mode="In" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SpGetCoursesCursor">
+          <Property Type="Decimal" Name="CourseID" Nullable="false" />
+          <Property Type="Decimal" Name="AuthorID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <Property Type="Decimal" Name="FullPrice" Nullable="false" />
+          <Property Type="String" Name="Levell" Nullable="false" />
+        </ComplexType>
+        <EnumType Name="CourseLevel" UnderlyingType="Byte">
+          <Member Name="Beginner" Value="1" />
+          <Member Name="Intermediate" Value="2" />
+          <Member Name="Advance" Value="3" />
+        </EnumType>
+        <EnumType Name="Level" UnderlyingType="Byte" a:ExternalTypeName="DbFirstOracle.Program.Level" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlutoModelStoreContainer" CdmEntityContainer="PlutoDbContext">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="PlutoModel.Author">
+              <MappingFragment StoreEntitySet="AUTHORS">
+                <ScalarProperty Name="AuthorID" ColumnName="AUTHORID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="PlutoModel.Course">
+              <MappingFragment StoreEntitySet="COURSES">
+                <ScalarProperty Name="FullPrice" ColumnName="FULLPRICE" />
+                <ScalarProperty Name="CourseID" ColumnName="COURSEID" />
+                <ScalarProperty Name="AuthorID" ColumnName="AUTHORID" />
+                <ScalarProperty Name="Title" ColumnName="TITLE" />
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="Levell" ColumnName="LEVELL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseSections">
+            <EntityTypeMapping TypeName="PlutoModel.CourseSection">
+              <MappingFragment StoreEntitySet="COURSESECTION">
+                <ScalarProperty Name="SectionID" ColumnName="SECTIONID" />
+                <ScalarProperty Name="CourseID" ColumnName="COURSEID" />
+                <ScalarProperty Name="Title" ColumnName="TITLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="PlutoModel.Post">
+              <MappingFragment StoreEntitySet="POSTS">
+                <ScalarProperty Name="PostID" ColumnName="POSTID" />
+                <ScalarProperty Name="DatePublished" ColumnName="DATEPUBLISHED" />
+                <ScalarProperty Name="Title" ColumnName="TITLE" />
+                <ScalarProperty Name="Body" ColumnName="BODY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="PlutoModel.Tag">
+              <MappingFragment StoreEntitySet="TAGS">
+                <ScalarProperty Name="TagID" ColumnName="TAGID" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUsers">
+            <EntityTypeMapping TypeName="PlutoModel.TblUser">
+              <MappingFragment StoreEntitySet="TBLUSER">
+                <ScalarProperty Name="UserID" ColumnName="USERID" />
+                <ScalarProperty Name="Username" ColumnName="USERNAME" />
+                <ScalarProperty Name="Password" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="COURSETAGS" TypeName="PlutoModel.COURSETAGS" StoreEntitySet="COURSETAGS">
+            <EndProperty Name="COURSES">
+              <ScalarProperty Name="CourseID" ColumnName="COURSEID" />
+            </EndProperty>
+            <EndProperty Name="TAGS">
+              <ScalarProperty Name="TagID" ColumnName="TAGID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetAuthorCourses" FunctionName="PlutoModel.Store.FUNCGETAUTHORCOURSES" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeleteCourse" FunctionName="PlutoModel.Store.SP_DELETECOURSE" />
+          <FunctionImportMapping FunctionImportName="GetCourses" FunctionName="PlutoModel.Store.SP_GETCOURSES" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertCourse" FunctionName="PlutoModel.Store.SP_INSERTCOURSE" />
+          <FunctionImportMapping FunctionImportName="UpdateCourse" FunctionName="PlutoModel.Store.UPDATECOURSE" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
