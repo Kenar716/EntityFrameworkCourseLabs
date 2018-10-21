@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.- DbFirstVidzyOracle", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.- CodeFirstVidzyOracle", "CodeFirstVidzyOracle\05.- CodeFirstVidzyOracle.csproj", "{7F2BB04F-E5B0-4833-A7E2-C0759085A07C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.- FluentAPIVidzy", "FluentAPIVidzy\07.- FluentAPIVidzy.csproj", "{9D040799-B3D3-43E8-B36F-9A0A7ECCF117}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{7F2BB04F-E5B0-4833-A7E2-C0759085A07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F2BB04F-E5B0-4833-A7E2-C0759085A07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F2BB04F-E5B0-4833-A7E2-C0759085A07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D040799-B3D3-43E8-B36F-9A0A7ECCF117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D040799-B3D3-43E8-B36F-9A0A7ECCF117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D040799-B3D3-43E8-B36F-9A0A7ECCF117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D040799-B3D3-43E8-B36F-9A0A7ECCF117}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
