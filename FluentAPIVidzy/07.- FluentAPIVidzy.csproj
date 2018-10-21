@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityConfigurations\GenreConfiguration.cs" />
+    <Compile Include="EntityConfigurations\TagConfiguration.cs" />
     <Compile Include="EntityConfigurations\VideoConfiguration.cs" />
     <Compile Include="Migrations\201810190449441_AddVideosTableAndGenresTable.cs" />
     <Compile Include="Migrations\201810190449441_AddVideosTableAndGenresTable.Designer.cs">
@@ -71,15 +72,22 @@
     <Compile Include="Migrations\201810210823281_ChangesInVideosAndGenresTable.Designer.cs">
       <DependentUpon>201810210823281_ChangesInVideosAndGenresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810211712070_AddTagsTableAndRelationshipManyToManyWithVideosTable.cs" />
+    <Compile Include="Migrations\201810211712070_AddTagsTableAndRelationshipManyToManyWithVideosTable.Designer.cs">
+      <DependentUpon>201810211712070_AddTagsTableAndRelationshipManyToManyWithVideosTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Genre.cs" />
+    <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="Model\VidzyDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +106,12 @@
     <EmbeddedResource Include="Migrations\201810210823281_ChangesInVideosAndGenresTable.resx">
       <DependentUpon>201810210823281_ChangesInVideosAndGenresTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810211712070_AddTagsTableAndRelationshipManyToManyWithVideosTable.resx">
+      <DependentUpon>201810211712070_AddTagsTableAndRelationshipManyToManyWithVideosTable.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
