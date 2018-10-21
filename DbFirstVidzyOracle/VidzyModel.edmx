@@ -20,6 +20,7 @@
           <Property Name="NAME" Type="varchar2" MaxLength="255" Nullable="false" />
           <Property Name="RELEASEDATE" Type="date" Nullable="false" />
           <Property Name="GENREID" Type="number" Precision="3" Scale="0" />
+          <Property Name="CLASSIFICATION" Type="number" Precision="3" Scale="0" Nullable="false" />
         </EntityType>
         <Association Name="VIDZYE1_VIDEOS_GENREID_FK">
           <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1">
@@ -39,6 +40,7 @@
           <Parameter Name="ANAME" Type="varchar2" Mode="In" />
           <Parameter Name="ARELEASE_DATE" Type="date" Mode="In" />
           <Parameter Name="AGENRE" Type="varchar2" Mode="In" />
+          <Parameter Name="ACLASSIFICATION" Type="number" Mode="In" />
         </Function>
         <EntityContainer Name="VidzyModelStoreContainer">
           <EntitySet Name="GENRES" EntityType="Self.GENRES" Schema="VIDZYEFDBFIRST" store:Type="Tables" />
@@ -69,6 +71,7 @@
           <Property Name="RELEASEDATE" Type="DateTime" Nullable="false" />
           <Property Name="GENREID" Type="Byte" />
           <NavigationProperty Name="GENRE" Relationship="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK" FromRole="VIDEO" ToRole="GENRE" />
+          <Property Name="CLASSIFICATION" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityContainer Name="VidzyDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="GENRES" EntityType="Self.GENRE" />
@@ -77,6 +80,7 @@
             <Parameter Name="ANAME" Mode="In" Type="String" />
             <Parameter Name="ARELEASE_DATE" Mode="In" Type="DateTime" />
             <Parameter Name="AGENRE" Mode="In" Type="String" />
+            <Parameter Name="ACLASSIFICATION" Mode="In" Type="Decimal" />
           </FunctionImport>
           <AssociationSet Name="VIDZYE1_VIDEOS_GENREID_FK" Association="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK">
             <End Role="GENRE" EntitySet="GENRES" />
@@ -114,6 +118,7 @@
           <EntitySetMapping Name="VIDEOS">
             <EntityTypeMapping TypeName="VidzyModel.VIDEO">
               <MappingFragment StoreEntitySet="VIDEOS">
+                <ScalarProperty Name="CLASSIFICATION" ColumnName="CLASSIFICATION" />
                 <ScalarProperty Name="GENREID" ColumnName="GENREID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
