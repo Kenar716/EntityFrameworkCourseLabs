@@ -19,7 +19,9 @@ namespace CodeFirstVidzyOracle.EntityConfigurations
             //Properties Configuration (sort alphabetically)
             Property(c => c.Name)
                 .IsRequired()
-                .HasMaxLength(255);
+                .HasMaxLength(255)
+                .HasColumnType("VARCHAR2")
+                .IsUnicode(false);
 
             //RelationsShips
         }

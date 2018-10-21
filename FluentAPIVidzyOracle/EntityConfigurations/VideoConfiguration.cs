@@ -23,7 +23,9 @@ namespace CodeFirstVidzyOracle.EntityConfigurations
 
             Property(c => c.Name)
                 .IsRequired()
-                .HasMaxLength(255);
+                .HasMaxLength(255)
+                .HasColumnType("VARCHAR2")
+                .IsUnicode(false);
 
             Property(c => c.ClassificationType)
                 .HasColumnType("NUMBER");
