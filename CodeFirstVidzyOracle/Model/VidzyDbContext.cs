@@ -12,7 +12,7 @@ namespace CodeFirstVidzyOracle.Model
         public DbSet<Video> Courses { get; set; }
         public DbSet<Genre> Genres { get; set; }
 
-        public VidzyDbContext() : base()
+        public VidzyDbContext() : base("VidzyDbContext")
         {
 
         }
