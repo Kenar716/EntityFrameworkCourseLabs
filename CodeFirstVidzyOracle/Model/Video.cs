@@ -13,5 +13,13 @@ namespace CodeFirstVidzyOracle.Model
         public DateTime ReleaseDate { get; set; }
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
+        public Classification ClassificationType { get; set; }
+
+        public enum Classification : byte
+        {
+            Silver = 1,
+            Gold = 2,
+            Platinum = 3
+        }
     }
 }

@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201810210602491_ChangeRelationshipOneToOneAtVideoGenresTable.Designer.cs">
       <DependentUpon>201810210602491_ChangeRelationshipOneToOneAtVideoGenresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810210616169_AddClassificationTypeColumnOnVideosTable.cs" />
+    <Compile Include="Migrations\201810210616169_AddClassificationTypeColumnOnVideosTable.Designer.cs">
+      <DependentUpon>201810210616169_AddClassificationTypeColumnOnVideosTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Genre.cs" />
     <Compile Include="Model\Video.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810210602491_ChangeRelationshipOneToOneAtVideoGenresTable.resx">
       <DependentUpon>201810210602491_ChangeRelationshipOneToOneAtVideoGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810210616169_AddClassificationTypeColumnOnVideosTable.resx">
+      <DependentUpon>201810210616169_AddClassificationTypeColumnOnVideosTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
