@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace DbFirstVidzyOracle
 {
+    public enum ClassificationType : byte
+    {
+        Silver = 1,
+        Gold = 2,
+        Platinum = 3
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -30,7 +37,8 @@ namespace DbFirstVidzyOracle
                 //Console.WriteLine("It added");
 
                 //3er Iteration
-                dbContext.AddVideo("Clone Wars", new DateTime(2008, 5, 25), "Horror", 2); //Gold
+                //dbContext.AddVideo("Clone Wars", new DateTime(2008, 5, 25), "Horror", 2); //Gold
+                dbContext.AddVideo("Clone Wars", new DateTime(2008, 5, 25), "Horror", ClassificationType.Platinum); //Gold
                 Console.WriteLine("Clone Wars added");
             }
             catch (Exception ex)
