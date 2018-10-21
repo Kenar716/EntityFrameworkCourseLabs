@@ -16,5 +16,12 @@ namespace CodeFirstVidzyOracle.Model
         {
 
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("VIDZYEFCODEFIRSTDB");
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
