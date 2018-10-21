@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeFirstVidzyOracle.EntityConfigurations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace CodeFirstVidzyOracle.Model
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("VIDZYEFCODEFIRSTDB");
+
+            modelBuilder.Configurations.Add(new VideoConfiguration());
+            modelBuilder.Configurations.Add(new GenreConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

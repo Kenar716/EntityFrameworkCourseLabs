@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityConfigurations\GenreConfiguration.cs" />
+    <Compile Include="EntityConfigurations\VideoConfiguration.cs" />
     <Compile Include="Migrations\201810210531104_AddTablesVideosAndGenres.cs" />
     <Compile Include="Migrations\201810210531104_AddTablesVideosAndGenres.Designer.cs">
       <DependentUpon>201810210531104_AddTablesVideosAndGenres.cs</DependentUpon>
@@ -70,6 +72,10 @@
     <Compile Include="Migrations\201810210616169_AddClassificationTypeColumnOnVideosTable.cs" />
     <Compile Include="Migrations\201810210616169_AddClassificationTypeColumnOnVideosTable.Designer.cs">
       <DependentUpon>201810210616169_AddClassificationTypeColumnOnVideosTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810212118286_ChangesInVideosAndGenresTable.cs" />
+    <Compile Include="Migrations\201810212118286_ChangesInVideosAndGenresTable.Designer.cs">
+      <DependentUpon>201810212118286_ChangesInVideosAndGenresTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Genre.cs" />
@@ -94,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810210616169_AddClassificationTypeColumnOnVideosTable.resx">
       <DependentUpon>201810210616169_AddClassificationTypeColumnOnVideosTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810212118286_ChangesInVideosAndGenresTable.resx">
+      <DependentUpon>201810212118286_ChangesInVideosAndGenresTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
