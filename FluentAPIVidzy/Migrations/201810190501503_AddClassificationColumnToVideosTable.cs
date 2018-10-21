@@ -1,4 +1,4 @@
-namespace CodeFirstVidzy.Migrations
+namespace FluentAPIVidzy.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
