@@ -12,6 +12,7 @@ namespace CodeFirstVidzyOracle.Model
     {
         public DbSet<Video> Courses { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public VidzyDbContext() : base("VidzyDbContext")
         {
@@ -24,6 +25,7 @@ namespace CodeFirstVidzyOracle.Model
 
             modelBuilder.Configurations.Add(new VideoConfiguration());
             modelBuilder.Configurations.Add(new GenreConfiguration());
+            modelBuilder.Configurations.Add(new TagConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityConfigurations\GenreConfiguration.cs" />
+    <Compile Include="EntityConfigurations\TagConfiguration.cs" />
     <Compile Include="EntityConfigurations\VideoConfiguration.cs" />
     <Compile Include="Migrations\201810210531104_AddTablesVideosAndGenres.cs" />
     <Compile Include="Migrations\201810210531104_AddTablesVideosAndGenres.Designer.cs">
@@ -77,8 +78,13 @@
     <Compile Include="Migrations\201810212118286_ChangesInVideosAndGenresTable.Designer.cs">
       <DependentUpon>201810212118286_ChangesInVideosAndGenresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810212244540_AddTagsTableAndRelationshipManyToManyWithVideosTable.cs" />
+    <Compile Include="Migrations\201810212244540_AddTagsTableAndRelationshipManyToManyWithVideosTable.Designer.cs">
+      <DependentUpon>201810212244540_AddTagsTableAndRelationshipManyToManyWithVideosTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Genre.cs" />
+    <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\Video.cs" />
     <Compile Include="Model\VidzyDbContext.cs" />
     <Compile Include="Program.cs" />
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810212118286_ChangesInVideosAndGenresTable.resx">
       <DependentUpon>201810212118286_ChangesInVideosAndGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810212244540_AddTagsTableAndRelationshipManyToManyWithVideosTable.resx">
+      <DependentUpon>201810212244540_AddTagsTableAndRelationshipManyToManyWithVideosTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

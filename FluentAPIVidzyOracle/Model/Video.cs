@@ -14,6 +14,7 @@ namespace CodeFirstVidzyOracle.Model
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
         public Classification ClassificationType { get; set; }
+        public IList<Tag> Tags { get; set; }
 
         public enum Classification : byte
         {

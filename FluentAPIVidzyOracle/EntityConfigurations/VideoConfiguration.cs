@@ -31,6 +31,14 @@ namespace CodeFirstVidzyOracle.EntityConfigurations
                 .HasColumnType("NUMBER");
 
             //RelationsShips
+            HasMany(v => v.Tags)
+                .WithMany(t => t.Videos)
+                .Map(m =>
+                {
+                    m.ToTable("VideoTags");
+                    m.MapLeftKey("VideoId");
+                    m.MapRightKey("TagId");
+                });
         }
     }
 }
