@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentAPIVidzy.EntityConfigurations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -15,6 +16,14 @@ namespace FluentAPIVidzy.Model
         public VidzyDbContext() : base()
         {
 
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new VideoConfiguration());
+            modelBuilder.Configurations.Add(new GenreConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
