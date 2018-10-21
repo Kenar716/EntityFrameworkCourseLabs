@@ -30,7 +30,7 @@ namespace DbFirstVidzyOracle
         public virtual DbSet<GENRE> GENRES { get; set; }
         public virtual DbSet<VIDEO> VIDEOS { get; set; }
     
-        public virtual int AddVideo(string aNAME, Nullable<System.DateTime> aRELEASE_DATE, string aGENRE, Nullable<ClassificationMovies> aCLASSIFICATION)
+        public virtual int AddVideo(string aNAME, Nullable<System.DateTime> aRELEASE_DATE, string aGENRE, Nullable<decimal> aCLASSIFICATION)
         {
             var aNAMEParameter = aNAME != null ?
                 new ObjectParameter("ANAME", aNAME) :
@@ -46,7 +46,7 @@ namespace DbFirstVidzyOracle
     
             var aCLASSIFICATIONParameter = aCLASSIFICATION.HasValue ?
                 new ObjectParameter("ACLASSIFICATION", aCLASSIFICATION) :
-                new ObjectParameter("ACLASSIFICATION", typeof(ClassificationMovies));
+                new ObjectParameter("ACLASSIFICATION", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddVideo", aNAMEParameter, aRELEASE_DATEParameter, aGENREParameter, aCLASSIFICATIONParameter);
         }

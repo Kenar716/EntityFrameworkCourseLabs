@@ -40,7 +40,7 @@
           <Parameter Name="ANAME" Type="varchar2" Mode="In" />
           <Parameter Name="ARELEASE_DATE" Type="date" Mode="In" />
           <Parameter Name="AGENRE" Type="varchar2" Mode="In" />
-          <Parameter Name="ACLASSIFICATION" Type="number" Mode="In" Precision="3" />
+          <Parameter Name="ACLASSIFICATION" Type="number" Mode="In" />
         </Function>
         <EntityContainer Name="VidzyModelStoreContainer">
           <EntitySet Name="GENRES" EntityType="Self.GENRES" Schema="VIDZYEFDBFIRST" store:Type="Tables" />
@@ -80,7 +80,7 @@
             <Parameter Name="ANAME" Mode="In" Type="String" />
             <Parameter Name="ARELEASE_DATE" Mode="In" Type="DateTime" />
             <Parameter Name="AGENRE" Mode="In" Type="String" />
-            <Parameter Name="ACLASSIFICATION" Mode="In" Type="VidzyModel.ClassificationMovies" />
+            <Parameter Name="ACLASSIFICATION" Mode="In" Type="Decimal" />
           </FunctionImport>
           <AssociationSet Name="VIDZYE1_VIDEOS_GENREID_FK" Association="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK">
             <End Role="GENRE" EntitySet="GENRES" />
