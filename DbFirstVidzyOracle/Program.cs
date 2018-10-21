@@ -14,15 +14,20 @@ namespace DbFirstVidzyOracle
             try
             {
                 var dbContext = new VidzyDbContext();
-                var video1 = new VIDEO()
-                {
-                    NAME = "Star Wars Episode 1",
-                    RELEASEDATE = new DateTime(1978, 5, 25)
 
-                };
+                //1st Iteration
+                //var video1 = new VIDEO()
+                //{
+                //    NAME = "Star Wars Episode 1",
+                //    RELEASEDATE = new DateTime(1978, 5, 25)
 
-                dbContext.AddVideo("Star Wars Episode 1", new DateTime(1978, 5, 25), "Action");
-                Console.WriteLine("Star Wars Episode 1 added");
+                //};
+                //dbContext.AddVideo("Star Wars Episode 1", new DateTime(1978, 5, 25), "Action");
+                //Console.WriteLine("Star Wars Episode 1 added");
+
+                //2nd Iteration
+                dbContext.AddVideo("It", new DateTime(1985, 10, 20), "Horror");
+                Console.WriteLine("It added");
             }
             catch (Exception ex)
             {

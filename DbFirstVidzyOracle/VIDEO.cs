@@ -14,17 +14,11 @@ namespace DbFirstVidzyOracle
     
     public partial class VIDEO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public VIDEO()
-        {
-            this.GENRES = new HashSet<GENRE>();
-        }
-    
         public int ID { get; set; }
         public string NAME { get; set; }
         public System.DateTime RELEASEDATE { get; set; }
+        public Nullable<byte> GENREID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GENRE> GENRES { get; set; }
+        public virtual GENRE GENRE { get; set; }
     }
 }

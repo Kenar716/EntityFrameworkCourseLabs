@@ -4,21 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VidzyModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VidzyModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GENRES">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="number" Precision="3" Scale="0" Nullable="false" />
           <Property Name="NAME" Type="varchar2" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VIDEOGENRES">
-          <Key>
-            <PropertyRef Name="VIDEOID" />
-            <PropertyRef Name="GENREID" />
-          </Key>
-          <Property Name="VIDEOID" Type="number" Precision="10" Scale="0" Nullable="false" />
-          <Property Name="GENREID" Type="number" Precision="3" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="VIDEOS">
           <Key>
@@ -27,32 +19,19 @@
           <Property Name="ID" Type="number" Precision="10" Scale="0" Nullable="false" />
           <Property Name="NAME" Type="varchar2" MaxLength="255" Nullable="false" />
           <Property Name="RELEASEDATE" Type="date" Nullable="false" />
+          <Property Name="GENREID" Type="number" Precision="3" Scale="0" />
         </EntityType>
-        <Association Name="VIDZYE1_VIDEOGENRES_GENREID_FK">
-          <End Role="GENRES" Type="Self.GENRES" Multiplicity="1">
+        <Association Name="VIDZYE1_VIDEOS_GENREID_FK">
+          <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="VIDEOGENRES" Type="Self.VIDEOGENRES" Multiplicity="*" />
+          <End Role="VIDEOS" Type="Self.VIDEOS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GENRES">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="VIDEOGENRES">
+            <Dependent Role="VIDEOS">
               <PropertyRef Name="GENREID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="VIDZYE1_VIDEOGENRES_VIDEOID_FK">
-          <End Role="VIDEOS" Type="Self.VIDEOS" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="VIDEOGENRES" Type="Self.VIDEOGENRES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VIDEOS">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="VIDEOGENRES">
-              <PropertyRef Name="VIDEOID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -63,19 +42,13 @@
         </Function>
         <EntityContainer Name="VidzyModelStoreContainer">
           <EntitySet Name="GENRES" EntityType="Self.GENRES" Schema="VIDZYEFDBFIRST" store:Type="Tables" />
-          <EntitySet Name="VIDEOGENRES" EntityType="Self.VIDEOGENRES" Schema="VIDZYEFDBFIRST" store:Type="Tables" />
           <EntitySet Name="VIDEOS" EntityType="Self.VIDEOS" Schema="VIDZYEFDBFIRST" store:Type="Tables" />
-          <AssociationSet Name="VIDZYE1_VIDEOGENRES_GENREID_FK" Association="Self.VIDZYE1_VIDEOGENRES_GENREID_FK">
+          <AssociationSet Name="VIDZYE1_VIDEOS_GENREID_FK" Association="Self.VIDZYE1_VIDEOS_GENREID_FK">
             <End Role="GENRES" EntitySet="GENRES" />
-            <End Role="VIDEOGENRES" EntitySet="VIDEOGENRES" />
-          </AssociationSet>
-          <AssociationSet Name="VIDZYE1_VIDEOGENRES_VIDEOID_FK" Association="Self.VIDZYE1_VIDEOGENRES_VIDEOID_FK">
             <End Role="VIDEOS" EntitySet="VIDEOS" />
-            <End Role="VIDEOGENRES" EntitySet="VIDEOGENRES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VidzyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -85,7 +58,7 @@
           </Key>
           <Property Name="ID" Type="Byte" Nullable="false" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="VIDEOS" Relationship="Self.VIDEOGENRES" FromRole="GENRES" ToRole="VIDEOS" />
+          <NavigationProperty Name="VIDEOS" Relationship="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK" FromRole="GENRE" ToRole="VIDEO" />
         </EntityType>
         <EntityType Name="VIDEO">
           <Key>
@@ -94,25 +67,36 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RELEASEDATE" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="GENRES" Relationship="Self.VIDEOGENRES" FromRole="VIDEOS" ToRole="GENRES" />
+          <Property Name="GENREID" Type="Byte" />
+          <NavigationProperty Name="GENRE" Relationship="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK" FromRole="VIDEO" ToRole="GENRE" />
         </EntityType>
-        <Association Name="VIDEOGENRES">
-          <End Role="GENRES" Type="Self.GENRE" Multiplicity="*" />
-          <End Role="VIDEOS" Type="Self.VIDEO" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="VidzyDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="GENRES" EntityType="Self.GENRE" />
           <EntitySet Name="VIDEOS" EntityType="Self.VIDEO" />
-          <AssociationSet Name="VIDEOGENRES" Association="Self.VIDEOGENRES">
-            <End Role="GENRES" EntitySet="GENRES" />
-            <End Role="VIDEOS" EntitySet="VIDEOS" />
-          </AssociationSet>
           <FunctionImport Name="AddVideo">
             <Parameter Name="ANAME" Mode="In" Type="String" />
             <Parameter Name="ARELEASE_DATE" Mode="In" Type="DateTime" />
             <Parameter Name="AGENRE" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="VIDZYE1_VIDEOS_GENREID_FK" Association="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK">
+            <End Role="GENRE" EntitySet="GENRES" />
+            <End Role="VIDEO" EntitySet="VIDEOS" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="VIDZYE1_VIDEOS_GENREID_FK">
+          <End Type="VidzyModel.GENRE" Role="GENRE" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VidzyModel.VIDEO" Role="VIDEO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VIDEO">
+              <PropertyRef Name="GENREID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -130,20 +114,13 @@
           <EntitySetMapping Name="VIDEOS">
             <EntityTypeMapping TypeName="VidzyModel.VIDEO">
               <MappingFragment StoreEntitySet="VIDEOS">
+                <ScalarProperty Name="GENREID" ColumnName="GENREID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="RELEASEDATE" ColumnName="RELEASEDATE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="VIDEOGENRES" TypeName="VidzyModel.VIDEOGENRES" StoreEntitySet="VIDEOGENRES">
-            <EndProperty Name="GENRES">
-              <ScalarProperty Name="ID" ColumnName="GENREID" />
-            </EndProperty>
-            <EndProperty Name="VIDEOS">
-              <ScalarProperty Name="ID" ColumnName="VIDEOID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="AddVideo" FunctionName="VidzyModel.Store.SPADDVIDEO" />
         </EntityContainerMapping>
       </Mapping>
