@@ -80,7 +80,7 @@
             <Parameter Name="ANAME" Mode="In" Type="String" />
             <Parameter Name="ARELEASE_DATE" Mode="In" Type="DateTime" />
             <Parameter Name="AGENRE" Mode="In" Type="String" />
-            <Parameter Name="ACLASSIFICATION" Mode="In" Type="VidzyModel.ClassificationType" />
+            <Parameter Name="ACLASSIFICATION" Mode="In" Type="VidzyModel.ClassificationMovies" />
           </FunctionImport>
           <AssociationSet Name="VIDZYE1_VIDEOS_GENREID_FK" Association="VidzyModel.VIDZYE1_VIDEOS_GENREID_FK">
             <End Role="GENRE" EntitySet="GENRES" />
@@ -102,6 +102,11 @@
           </ReferentialConstraint>
         </Association>
         <EnumType Name="ClassificationType" UnderlyingType="Byte" a:ExternalTypeName="DbFirstVidzyOracle.ClassificationType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="ClassificationMovies" UnderlyingType="Byte">
+          <Member Name="Silver" Value="1" />
+          <Member Name="Gold" Value="2" />
+          <Member Name="Platinum" Value="3" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

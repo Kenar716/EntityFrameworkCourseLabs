@@ -38,7 +38,7 @@ namespace DbFirstVidzyOracle
 
                 //3er Iteration
                 //dbContext.AddVideo("Clone Wars", new DateTime(2008, 5, 25), "Horror", 2); //Gold
-                dbContext.AddVideo("Clone Wars", new DateTime(2008, 5, 25), "Horror", ClassificationType.Platinum); //Gold
+                dbContext.AddVideo("Clone Wars", new DateTime(2008, 5, 25), "Horror", ClassificationMovies.Platinum); //Gold
                 Console.WriteLine("Clone Wars added");
             }
             catch (Exception ex)
