@@ -122,6 +122,8 @@
         <Function Name="FUNCGETAUTHORCOURSES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST">
           <Parameter Name="AAUTHORID" Type="number" Mode="In" />
         </Function>
+        <Function Name="PKG_TEST_SP_GETCOURSESTEST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST" StoreFunctionName="PKG_TEST.SP_GETCOURSESTEST" />
+        <Function Name="PKG_TEST_SP_GETCOURSESV2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST" StoreFunctionName="PKG_TEST.SP_GETCOURSESV2" />
         <Function Name="SP_DELETECOURSE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PLUTOEFDBFIRST">
           <Parameter Name="ACOURSEID" Type="number" Mode="In" />
         </Function>
@@ -299,6 +301,8 @@
             <Parameter Name="ALEVELSTRING" Mode="In" Type="String" />
             <Parameter Name="ALEVEL" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="GetCoursesV2" ReturnType="Collection(PlutoModel.SpGetCoursesV2Cursor)" />
+          <FunctionImport Name="GetCourseTest" />
         </EntityContainer>
         <ComplexType Name="SpGetCoursesCursor">
           <Property Type="Decimal" Name="CourseID" Nullable="false" />
@@ -314,6 +318,22 @@
           <Member Name="Advance" Value="3" />
         </EnumType>
         <EnumType Name="Level" UnderlyingType="Byte" a:ExternalTypeName="DbFirstOracle.Program.Level" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <ComplexType Name="SpGetCourseTestCursor">
+          <Property Type="Decimal" Name="COURSEID" Nullable="false" />
+          <Property Type="Decimal" Name="AUTHORID" Nullable="false" />
+          <Property Type="String" Name="TITLE" Nullable="false" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" />
+          <Property Type="Decimal" Name="FULLPRICE" Nullable="false" />
+          <Property Type="Decimal" Name="LEVELL" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SpGetCoursesV2Cursor">
+          <Property Type="Decimal" Name="COURSEID" Nullable="false" />
+          <Property Type="Decimal" Name="AUTHORID" Nullable="false" />
+          <Property Type="String" Name="TITLE" Nullable="false" />
+          <Property Type="String" Name="DESCRIPTION" Nullable="false" />
+          <Property Type="Decimal" Name="FULLPRICE" Nullable="false" />
+          <Property Type="Decimal" Name="LEVELL" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -391,6 +411,20 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertCourse" FunctionName="PlutoModel.Store.SP_INSERTCOURSE" />
           <FunctionImportMapping FunctionImportName="UpdateCourse" FunctionName="PlutoModel.Store.UPDATECOURSE" />
+          <FunctionImportMapping FunctionImportName="GetCoursesV2" FunctionName="PlutoModel.Store.PKG_TEST_SP_GETCOURSESV2" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PlutoModel.SpGetCoursesV2Cursor">
+                <ScalarProperty Name="COURSEID" ColumnName="COURSEID" />
+                <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="FULLPRICE" ColumnName="FULLPRICE" />
+                <ScalarProperty Name="LEVELL" ColumnName="LEVELL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCourseTest" FunctionName="PlutoModel.Store.PKG_TEST_SP_GETCOURSESTEST" >
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

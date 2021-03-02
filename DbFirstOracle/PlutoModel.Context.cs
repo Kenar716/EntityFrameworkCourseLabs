@@ -124,5 +124,15 @@ namespace DbFirstOracle
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCourse", aCOURSEIDParameter, aTITLEParameter, aDESCParameter, aLEVELSTRINGParameter, aLEVELParameter);
         }
+    
+        public virtual ObjectResult<SpGetCoursesV2Cursor> GetCoursesV2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpGetCoursesV2Cursor>("GetCoursesV2");
+        }
+    
+        public virtual int GetCourseTest()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetCourseTest");
+        }
     }
 }

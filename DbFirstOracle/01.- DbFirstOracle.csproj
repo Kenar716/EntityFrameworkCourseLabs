@@ -92,6 +92,12 @@
     <Compile Include="SpGetCoursesCursor.cs">
       <DependentUpon>PlutoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SpGetCoursesV2Cursor.cs">
+      <DependentUpon>PlutoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpGetCourseTestCursor.cs">
+      <DependentUpon>PlutoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tag.cs">
       <DependentUpon>PlutoModel.tt</DependentUpon>
     </Compile>
@@ -100,7 +106,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="PlutoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
